@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Menu from './components/Menu'
 import Game from './components/Game'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import gameService from './services/game'
+import './App.css'
 
 const App = () => {
   const [messages, setMessages] = useState(null)

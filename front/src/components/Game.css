@@ -6,7 +6,7 @@
                        "chat-body   code-field-body";
   grid-column-gap: 2rem;
   padding: 2rem;
-  height: 100vh;
+  flex: 1;
 }
 
 #chat-body, #code-field-body {
