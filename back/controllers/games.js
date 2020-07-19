@@ -10,4 +10,12 @@ router.post('', (_request, response) => {
   })
 })
 
+router.get('/:id', (request, response) => {
+  const { quote, messages } = Game.get(request.params.id)
+  response.json({
+    quote,
+    messages
+  })
+})
+
 module.exports = router
