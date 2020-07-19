@@ -1,0 +1,2 @@
+* liracer
+This is a game where you compete to write source code quotes as fast as possible
