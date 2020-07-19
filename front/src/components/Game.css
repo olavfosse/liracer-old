@@ -1,0 +1,36 @@
+#game {
+  display: grid;
+  grid-template-columns: auto 750px;
+  grid-template-rows: 2rem auto;
+  grid-template-areas: "chat-header code-field-header"
+                       "chat-body   code-field-body";
+  grid-column-gap: 2rem;
+  padding: 2rem;
+  height: 100vh;
+}
+
+#chat-body, #code-field-body {
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 1rem;
+}
+
+#chat-body {
+  grid-area: chat-body;
+}
+
+#code-field-body {
+  grid-area: code-field-body;
+}
+
+#chat-header, #code-field-header {
+  background-color: #e0e0e0;
+}
+
+#chat-header {
+  grid-area: chat-header;
+}
+
+#code-field-header {
+  grid-area: code-field-header;
+}
