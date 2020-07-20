@@ -39,6 +39,7 @@ body {
 #chat-body {
   grid-area: chat-body;
   overflow: scroll;
+  min-width: 300px;
 }
 
 #chat-input {
