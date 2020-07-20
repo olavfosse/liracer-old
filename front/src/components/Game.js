@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import './Game.css'
 
 const wsUrl = 'ws://localhost:3001/'
+const instructionMessage = {
+  sender: 'liracer',
+  content: 'To join a game, send "/join id". If a game by the given id exists you join that, otherwise a new game is created.'
+}
 
 const Game = () => {
   const [messages, setMessages] = useState([])
@@ -20,6 +24,11 @@ const Game = () => {
   }
 
   useEffect(() => {
+    const message = {
+      sender: 'liracer',
+      content: 'Welcome to liracer!'
+    }
+    setMessages([...messages, message, {...instructionMessage}])
     const fetchWs = async () => {
       const websocket = new WebSocket(wsUrl)
       setWs(websocket)
@@ -67,11 +76,7 @@ const Game = () => {
               sender: 'liracer',
               content: 'You need to be in a game to do this.'
             }
-            const message2 = {
-              sender: 'liracer',
-              content: 'To join a game, send "/join id". If a game by the given id exists you join that, otherwise a new game is created.'
-            }
-            setMessages([...messages, message1, message2])
+            setMessages([...messages, message1, {...instructionMessage}])
           }
       }
     }
