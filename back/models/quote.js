@@ -28,12 +28,28 @@ const getQuotes = () => {
   return quotes
 }
 
+const getProgramPath = (language, program) => path.join(__dirname, 'quotes', language, program)
+
 const enforceNoSpaceIndentation = (quotes) => {
   quotes.forEach(quote => {
-    const programPath = path.join(__dirname, 'quotes', quote.language, quote.program)
     quote.code.split('\n').forEach((line, index) => {
       if(line.startsWith(' ')) {
-        throw `Found space indentation at ${programPath}:${index+1}`
+        const path = getProgramPath(quote.language, quote.program)
+        console.error(`ERROR: Found space indentation at ${path}:${index + 1}`)
+        process.exit(1)
+      }
+    })
+  })
+}
+
+const enforceMaxium79CharactersPerLine = (quotes) => {
+  quotes.forEach(quote => {
+
+    quote.code.split('\n').forEach((line, index) => {
+      if(line.length > 79) {
+        const path = getProgramPath(quote.language, quote.program)
+        console.error(`ERROR: Found line with more than 79 characters at ${path}:${index + 1}`)
+        process.exit(1)
       }
     })
   })
@@ -41,6 +57,7 @@ const enforceNoSpaceIndentation = (quotes) => {
 
 const quotes = getQuotes()
 enforceNoSpaceIndentation(quotes)
+enforceMaxium79CharactersPerLine(quotes)
 
 const random = () => quotes[Math.floor(Math.random() * quotes.length)]
 
