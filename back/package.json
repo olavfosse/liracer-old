@@ -8,5 +8,7 @@
   },
   "author": "",
   "license": "UNLICENSED",
-  "dependencies": {}
+  "dependencies": {
+    "ws": "^7.3.1"
+  }
 }
