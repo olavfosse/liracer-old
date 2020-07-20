@@ -8,6 +8,7 @@ const Game = () => {
   const [code, setCode] = useState('')
   const [ws, setWs] = useState(null)
   const [chatInput, setChatInput] = useState('')
+  const [gameId, setGameId] = useState(null)
 
   const send = (type, body, id) => {
     const message = {
@@ -61,10 +62,17 @@ const Game = () => {
           send('join', {}, id)
           break
         default:
-          const message = {
-            content: chatInput
+          if(gameId === null){
+            const message1 = {
+              sender: 'liracer',
+              content: 'You need to be in a game to do this.'
+            }
+            const message2 = {
+              sender: 'liracer',
+              content: 'To join a game, send "/join id". If a game by the given id exists you join that, otherwise a new game is created.'
+            }
+            setMessages([...messages, message1, message2])
           }
-          send('message', message)
       }
     }
 
