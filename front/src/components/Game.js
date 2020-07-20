@@ -9,10 +9,11 @@ const Game = () => {
   const [ws, setWs] = useState(null)
   const [chatInput, setChatInput] = useState('')
 
-  const send = (type, body) => {
+  const send = (type, body, id) => {
     const message = {
       type,
-      body
+      body,
+      id
     }
     ws.send(JSON.stringify(message))
   }
@@ -52,7 +53,19 @@ const Game = () => {
     if(chatInput === '') return
 
     const dispatch = () => {
-      send('message', { content: chatInput })
+      const words = chatInput.split('')
+      const command = words[0]
+      switch(command){
+        case('/join'):
+          const id = words[1]
+          send('join', {}, id)
+          break
+        default:
+          const message = {
+            content: chatInput
+          }
+          send('message', message)
+      }
     }
 
     dispatch()
