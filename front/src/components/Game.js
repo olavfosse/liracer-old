@@ -7,6 +7,15 @@ const Game = () => {
   const [messages, setMessages] = useState([])
   const [code, setCode] = useState('')
   const [ws, setWs] = useState(null)
+  const [chatInput, setChatInput] = useState('')
+
+  const send = (type, body) => {
+    const message = {
+      type,
+      body
+    }
+    ws.send(JSON.stringify(message))
+  }
 
   useEffect(() => {
     const fetchWs = async () => {
@@ -37,6 +46,19 @@ const Game = () => {
     ws.onmessage = dispatch
   }, [ws])
 
+  const handleSubmitChatInput = (event) => {
+    event.preventDefault()
+
+    if(chatInput === '') return
+
+    const dispatch = () => {
+      send('message', { content: chatInput })
+    }
+
+    dispatch()
+    setChatInput('')
+  }
+
   return (
     <div id="game">
       <div id="chat-header"/>
@@ -50,8 +72,10 @@ const Game = () => {
           ))
         }
       </div>
-      <form id="chat-input">
-        <input type="text"/>
+      <form onSubmit={handleSubmitChatInput} id="chat-input">
+        <input onChange={(event) => setChatInput(event.target.value)}
+               type="text"
+               value={chatInput}/>
       </form>
       <div id="code-field-header"/>
       <pre id="code-field-body">
