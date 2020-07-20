@@ -18,6 +18,7 @@
 
 #chat-body {
   grid-area: chat-body;
+  overflow: scroll;
 }
 
 #chat-input {
