@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Game.css'
 
-const Game = ({ quote, messages }) => {
+const Game = () => {
+  const [messages, setMessages] = useState([])
+  const [code, setCode] = useState('')
+
   return (
     <div id="game">
       <div id="chat-header"/>
@@ -20,7 +23,7 @@ const Game = ({ quote, messages }) => {
       </form>
       <div id="code-field-header"/>
       <pre id="code-field-body">
-        {quote.code}
+        {code}
       </pre>
     </div> 
   )
