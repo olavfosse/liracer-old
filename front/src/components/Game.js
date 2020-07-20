@@ -28,7 +28,7 @@ const Game = () => {
       sender: 'liracer',
       content: 'Welcome to liracer!'
     }
-    setMessages([...messages, message, {...instructionMessage}])
+    setMessages((messages) => [...messages, message, {...instructionMessage}])
     const fetchWs = async () => {
       const websocket = new WebSocket(wsUrl)
       setWs(websocket)
