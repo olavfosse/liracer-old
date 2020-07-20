@@ -1,15 +1,16 @@
 #game {
   display: grid;
   grid-template-columns: auto 750px;
-  grid-template-rows: 2rem auto;
+  grid-template-rows: 2rem auto 3rem;
   grid-template-areas: "chat-header code-field-header"
-                       "chat-body   code-field-body";
+                       "chat-body   code-field-body"
+                       "chat-input  code-field-body";
   grid-column-gap: 2rem;
   padding: 2rem;
   flex: 1;
 }
 
-#chat-body, #code-field-body {
+#chat-body, #code-field-body, #chat-input {
   background-color: #f0f0f0;
   margin: 0;
   padding: 1rem;
@@ -17,6 +18,22 @@
 
 #chat-body {
   grid-area: chat-body;
+}
+
+#chat-input {
+  grid-area: chat-input;
+  padding: calc(1em / 2);
+  width: auto;
+}
+
+#chat-input > input {
+  background-color: #e0e0e0;
+  margin: 0;
+  border: 0;
+  height: 2rem;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
 }
 
 #code-field-body {
