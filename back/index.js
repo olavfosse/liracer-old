@@ -7,7 +7,6 @@ const wss = new WebSocket.Server({ port }, () => {
 
 wss.on('connection', (ws, req) => {
   const ip = req.connection.remoteAddress
-  console.log(`Client connected with ip ${ip}`)
 
   const send = (type, body) => {
     const object = {
@@ -17,10 +16,18 @@ wss.on('connection', (ws, req) => {
     ws.send(JSON.stringify(object))
   }
 
+  const log = (...message) => console.log(ip,'|',...message)
+
   const message = {
     sender:  'liracer',
     content: 'Welcome to liracer!'
   }
 
   send('message', message)
+  
+  log('connected')
+
+  ws.onmessage = (message) => {
+    log('sent:', JSON.parse(message.data))
+  }
 })
