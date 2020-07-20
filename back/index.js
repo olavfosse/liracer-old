@@ -16,18 +16,35 @@ wss.on('connection', (ws, req) => {
     ws.send(JSON.stringify(object))
   }
 
-  const log = (...message) => console.log(ip,'|',...message)
-
-  const message = {
-    sender:  'liracer',
-    content: 'Welcome to liracer!'
+  const sendJoinInstructions = () => {
+    sendMessage('liracer', 'To join a game, send "/join id". If a game by the given id exists you join that, otherwise a new game is created.')
   }
 
-  send('message', message)
-  
+  const sendMessage = (sender, content) => send('message', { sender, content })
+
+  const log = (...message) => console.log(ip, '|', ...message)
+  const error = (...error) => console.error(ip, '|', ...error)
+
+  sendMessage('liracer', 'Welcome to liracer!')
+  sendJoinInstructions()
   log('connected')
 
   ws.onmessage = (message) => {
+  
+    const dispatch = async () => {
+      const { type, body } = JSON.parse(message.data)
+      if(!(typeof type === 'string' && typeof body === 'object')){
+        error('message invalid')
+        return
+      } else if (body.id === undefined){
+        error('no id')
+        sendMessage('liracer', 'You need to be in a game to do this.')
+        sendJoinInstructions()
+        return
+      }
+    }
+
     log('sent:', JSON.parse(message.data))
+    dispatch()
   }
 })
