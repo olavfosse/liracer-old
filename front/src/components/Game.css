@@ -1,3 +1,24 @@
+html {
+  --layer-0-background-color: #fdf6e3;
+  --layer-1-background-color: #eee8d5;
+  --layer-2-background-color: #ded8c5;
+
+  --layer-1-foreground-color: #4d4a44;
+}
+
+body {
+  background-color: var(--layer-0-background-color);
+}
+
+#chat-body, #code-field-body, #chat-input > input {
+  background-color: var(--layer-1-background-color);
+  color: var(--layer-1-foreground-color)
+}
+
+#chat-input, #chat-header, #code-field-header {
+  background-color: var(--layer-2-background-color);
+}
+
 #game {
   display: grid;
   grid-template-columns: auto 750px;
@@ -11,7 +32,6 @@
 }
 
 #chat-body, #code-field-body, #chat-input {
-  background-color: #f0f0f0;
   margin: 0;
   padding: 1rem;
 }
@@ -28,9 +48,9 @@
 }
 
 #chat-input > input {
-  background-color: #e0e0e0;
   margin: 0;
   border: 0;
+  padding: 0;
   height: 2rem;
   outline: none;
   width: 100%;
@@ -39,10 +59,6 @@
 
 #code-field-body {
   grid-area: code-field-body;
-}
-
-#chat-header, #code-field-header {
-  background-color: #e0e0e0;
 }
 
 #chat-header {
