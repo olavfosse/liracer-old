@@ -49,6 +49,16 @@ const Game = () => {
         case('message'):
           saveMessage(body)
           break
+        case('quote'):
+          console.log(body)
+          setCode(body.code)
+          const message = {
+            sender: 'liracer',
+            content: `The current quote is ${body.program} in the ${body.language} language`
+          }
+          setMessages((messages) => [...messages, message])
+          setGameId(body.id)
+          break
         default:
           throw new Error('Could not dispatch message')
       }
@@ -63,7 +73,7 @@ const Game = () => {
     if(chatInput === '') return
 
     const dispatch = () => {
-      const words = chatInput.split('')
+      const words = chatInput.split(' ')
       const command = words[0]
       switch(command){
         case('/join'):

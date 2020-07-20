@@ -1,4 +1,3 @@
-const crypto = require('crypto')
 const Quote = require('./quote')
 
 const makeColor = (name, code) => ({
@@ -19,14 +18,11 @@ const colors = [
   makeColor('turkish rose', '#ba7095')  // hsl(330°, 40%, 73%)
 ]
 
-const generateId = () => crypto.randomBytes(Number(20 / 2) ).toString('hex')
-
 const games = {}
 
 const get = (gameId) => games[gameId]
 
-const create = () => {
-  const id = generateId()
+const create = (id) => {
   const quote = Quote.random()
   const messages = [
     {

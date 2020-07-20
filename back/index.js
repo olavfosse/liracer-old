@@ -4,6 +4,7 @@ const port = process.env.PORT
 const wss = new WebSocket.Server({ port }, () => {
   console.log(`WebSocket server running on port ${port}`)
 })
+const Game = require('./models/game')
 
 wss.on('connection', (ws, req) => {
   const ip = req.connection.remoteAddress
@@ -26,11 +27,15 @@ wss.on('connection', (ws, req) => {
   ws.onmessage = (message) => {
   
     const dispatch = async () => {
-      const { type, body } = JSON.parse(message.data)
-      if(!(typeof type === 'string' && typeof body === 'object' && body.id !== undefined)){
+      const { type, body, id} = JSON.parse(message.data)
+      if(!(typeof type === 'string' && typeof body === 'object' && id !== undefined)){
         error('message invalid')
-      } else {
+      } else if(type === 'join'){
+        const game = Game.get(id) || Game.create(id)
+        game.players.push(ws)
 
+        const {quote} = game
+        send('quote', quote)
       }
     }
 
