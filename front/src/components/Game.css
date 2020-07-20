@@ -60,6 +60,7 @@ body {
 
 #code-field-body {
   grid-area: code-field-body;
+  overflow: scroll;
 }
 
 #chat-header {
