@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Game from './components/Game'
 import './App.css'
 
