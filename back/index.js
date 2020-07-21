@@ -28,32 +28,39 @@ wss.on('connection', (ws, req) => {
   log('connected')
 
   ws.onmessage = (message) => {
+    const handleJoin = (id) => {
+      const game = Game.get(id) || Game.create(id)
+      if(Game.getPlayer(id, ip)){
+        sendMessage('liracer', 'Your ip is already connected to this game. Please close your other client.') 
+      } else {
+        Game.createPlayer(id, ip, ws)
+        const {quote} = game
+        send('quote', quote)
+        send('messages', game.messages)
+      }
+    }
+
+    const handleMessage = (body, id) => {
+      const sender = Game.getPlayer(id, ip)
+      const recipients = Game.get(id).players
+      if(sender !== undefined){
+        const message = {
+          content: body.content,
+          sender: sender.name
+        }
+        Game.createMessage(id, message)
+        recipients.forEach(({ws}) => sendToWs('message', message, ws))
+        log(Game.get(id))
+      }
+    }
     const dispatch = async () => {
       const { type, body, id} = JSON.parse(message.data)
       if(!(typeof type === 'string' && typeof body === 'object' && id !== undefined)){
         error('message invalid')
       } else if(type === 'join'){
-        const game = Game.get(id) || Game.create(id)
-        if(Game.getPlayer(id, ip)){
-          sendMessage('liracer', 'Your ip is already connected to this game. Please close your other client.') 
-        } else {
-          Game.createPlayer(id, ip, ws)
-          const {quote} = game
-          send('quote', quote)
-          send('messages', game.messages)
-        }
+        handleJoin(id)
       } else if(type === 'message'){
-        const sender = Game.getPlayer(id, ip)
-        const recipients = Game.get(id).players
-        if(sender !== undefined){
-          const message = {
-            content: body.content,
-            sender: sender.name
-          }
-          Game.createMessage(id, message)
-          recipients.forEach(({ws}) => sendToWs('message', message, ws))
-          log(Game.get(id))
-        }
+        handleMessage(body, id)
       }
     }
 
