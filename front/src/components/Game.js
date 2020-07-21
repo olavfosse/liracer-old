@@ -23,12 +23,12 @@ const Game = () => {
     ws.send(JSON.stringify(message))
   }
 
+  const addMessage = (sender, content) => setMessages((messages) => messages.concat({ sender, content }))
+  const addInstructionMessage = () => setMessages((messages) => messages.concat(instructionMessage))
+
   useEffect(() => {
-    const message = {
-      sender: 'liracer',
-      content: 'Welcome to liracer!'
-    }
-    setMessages((messages) => [...messages, message, {...instructionMessage}])
+    addMessage('liracer', 'Welcome to liracer!')
+    addInstructionMessage()
     const fetchWs = async () => {
       const websocket = new WebSocket(wsUrl)
       setWs(websocket)
@@ -51,11 +51,7 @@ const Game = () => {
           break
         case('quote'):
           setCode(body.code)
-          const message = {
-            sender: 'liracer',
-            content: `The current quote is ${body.program} in the ${body.language} language`
-          }
-          setMessages((messages) => [...messages, message])
+          addMessage('liracer', `The current quote is ${body.program} in the ${body.language} language`)
           break
         default:
           throw new Error('Could not dispatch message')
@@ -81,11 +77,8 @@ const Game = () => {
           break
         default:
           if(gameId === null){
-            const message1 = {
-              sender: 'liracer',
-              content: 'You need to be in a game to do this.'
-            }
-            setMessages([...messages, message1, {...instructionMessage}])
+            addMessage('liracer', 'You need to be in a game to do this.')
+            addInstructionMessage()
           }
           else {
             const message = {
