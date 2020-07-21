@@ -9,15 +9,6 @@ const wss = new WebSocket.Server({ port }, () => {
 wss.on('connection', (ws, req) => {
   const ip = req.connection.remoteAddress
 
-  const send = (type, body) => {
-    const object = {
-      type,
-      body,
-    }
-    log('sent:', object)
-    ws.send(JSON.stringify(object))
-  }
-
   const sendToWs = (type, body, ws) => {
     const object = {
       type,
@@ -26,6 +17,8 @@ wss.on('connection', (ws, req) => {
     log('sent:', object)
     ws.send(JSON.stringify(object))
   }
+
+  const send = (type, body) => sendToWs(type, body, ws)
 
   const sendMessage = (sender, content) => send('message', { sender, content })
 
@@ -66,8 +59,6 @@ wss.on('connection', (ws, req) => {
 
     log('received:', JSON.parse(message.data))
     dispatch()
-
-   
   }
 
   ws.onclose = () => {
