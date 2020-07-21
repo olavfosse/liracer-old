@@ -15,6 +15,7 @@ const Game = () => {
   const [ws, setWs] = useState(null)
   const [chatInput, setChatInput] = useState('')
   const [gameId, setGameId] = useState(null)
+  const [cursors, setCursors] = useState({})
 
   const send = (type, body, id) => {
     const message = {
@@ -54,6 +55,9 @@ const Game = () => {
         case('quote'):
           setCode(body.code)
           addMessage('liracer', `The current quote is ${body.program} in the ${body.language} language`)
+          break
+        case('cursor'):
+          setCursors((cursors) => ({ ...cursors, [body.color]: body.cursorPosition }))
           break
         default:
           throw new Error('Could not dispatch message')
@@ -103,7 +107,8 @@ const Game = () => {
             setChatInput={setChatInput}/>
       <CodeField code={code}
                  send={send}
-                 gameId={gameId}/>
+                 gameId={gameId}
+                 cursors={cursors}/>
     </div> 
   )
 }

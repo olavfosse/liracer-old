@@ -52,6 +52,11 @@ wss.on('connection', (ws, req) => {
       }
     }
 
+    const handleCursor = (body, id) => {
+      const {color} = Game.getPlayer(ip)
+      sendToGame('cursor', {...body, color}, id)
+    }
+
     const dispatch = async () => {
       const { type, body, id} = JSON.parse(message.data)
       if(!(typeof type === 'string' && typeof body === 'object' && id !== undefined)){
@@ -60,6 +65,8 @@ wss.on('connection', (ws, req) => {
         handleJoin(id)
       } else if(type === 'message'){
         handleMessage(body, id)
+      } else if(type === 'cursor'){
+        handleCursor(body, id)
       } else {
         error('message indispatchable')
       }

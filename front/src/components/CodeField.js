@@ -14,7 +14,7 @@ const mapKeyToChar = (key) => {
   }
 }
 
-const CodeField = ({code, send, gameId}) => {
+const CodeField = ({ code, send, gameId, cursors }) => {
   const [cursorPosition, setCursorPosition] = useState(0)
   const [wrongChars, setWrongChars] = useState(0)
 
@@ -56,12 +56,18 @@ const CodeField = ({code, send, gameId}) => {
           code && code.split('').map((char, index) => {
             let style = {}
 
+            Object.entries(cursors).forEach(([color, innerIndex]) => {
+              if(index === innerIndex){
+                style.background = color
+              }
+            })
+
             if(wrongChars > 0) {
               if(index >= cursorPosition && index < cursorPosition + wrongChars)
                 style.background = '#ba5d5d'
             } else if (index === cursorPosition) {
               style.background = '#cfbaa5'
-            } 
+            }
         
             if(char === "\n"){
               return <br key={index}/>
