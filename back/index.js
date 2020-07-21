@@ -1,10 +1,14 @@
 const WebSocket = require('ws')
+const Game = require('./models/game')
 
 const port = process.env.PORT
 const wss = new WebSocket.Server({ port }, () => {
   console.log(`WebSocket server running on port ${port}`)
 })
-const Game = require('./models/game')
+
+const sendMessageToAll = (game) => {
+
+}
 
 wss.on('connection', (ws, req) => {
   const ip = req.connection.remoteAddress
@@ -14,6 +18,16 @@ wss.on('connection', (ws, req) => {
       type,
       body,
     }
+    log('sent:', object)
+    ws.send(JSON.stringify(object))
+  }
+
+  const sendToWs = (type, body, ws) => {
+    const object = {
+      type,
+      body
+    }
+    log('sent:', object)
     ws.send(JSON.stringify(object))
   }
 
@@ -32,14 +46,29 @@ wss.on('connection', (ws, req) => {
         error('message invalid')
       } else if(type === 'join'){
         const game = Game.get(id) || Game.create(id)
-        game.players.push(ws)
-
-        const {quote} = game
-        send('quote', quote)
+        if(Game.getPlayer(id, ip)){
+          sendMessage('liracer', 'Your ip is already connected to this game. Please close your other client.') 
+        } else {
+          Game.createPlayer(id, ip, ws)
+          const {quote} = game
+         send('quote', quote)
+        }
+      } else if(type === 'message'){
+        const sender = Game.getPlayer(id, ip)
+        const recipients = Game.get(id).players
+        if(sender !== undefined){
+          const message = {
+            content: body.content,
+            sender: sender.name
+          }
+          Game.createMessage(id, message)
+          recipients.forEach(({ws}) => sendToWs('message', message, ws))
+          log(Game.get(id))
+        }
       }
     }
 
-    log('sent:', JSON.parse(message.data))
+    log('received:', JSON.parse(message.data))
     dispatch()
   }
 })

@@ -52,12 +52,12 @@ const remove = (gameId) => {
   delete games[gameId]
 }
 
-const getPlayer = (gameId, playerIp) => games[gameId][playerIp]
+const getPlayer = (gameId, playerIp) => {
+  return games[gameId] && games[gameId].players.find(player => playerIp == player.ip)
+}
 
 const uniqueColor = (gameId) => colors.find(color => {
-  console.log(color)
   return !games[gameId].players.some(player => {
-    console.log(player)
     return JSON.stringify(player.color) === JSON.stringify(color.code)
   })  
 })
@@ -78,10 +78,11 @@ const createPlayer = (gameId, playerIp, ws) => {
 }
 
 const removePlayer = (gameId, playerIp) => {
-  delete games[gameId][playerIp]
+  const game = get(gameId)
+  game.players = game.players.filter(player => player.ip !== playerIp)
 }
 
-const saveMessage = (id, message) => {
+const createMessage = (id, message) => {
   games[id].messages.push(message)
 }
 
@@ -92,7 +93,7 @@ const publicInterface = {
   getPlayer,
   createPlayer, 
   removePlayer,
-  saveMessage
+  createMessage
 }
 
 module.exports = publicInterface

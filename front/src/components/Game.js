@@ -45,19 +45,18 @@ const Game = () => {
 
     const dispatch = (message) => {
       const { type, body } = JSON.parse(message.data)
+
       switch(type){
         case('message'):
           saveMessage(body)
           break
         case('quote'):
-          console.log(body)
           setCode(body.code)
           const message = {
             sender: 'liracer',
             content: `The current quote is ${body.program} in the ${body.language} language`
           }
           setMessages((messages) => [...messages, message])
-          setGameId(body.id)
           break
         default:
           throw new Error('Could not dispatch message')
@@ -79,6 +78,7 @@ const Game = () => {
         case('/join'):
           const id = words[1]
           send('join', {}, id)
+          setGameId(id)
           break
         default:
           if(gameId === null){
@@ -87,6 +87,12 @@ const Game = () => {
               content: 'You need to be in a game to do this.'
             }
             setMessages([...messages, message1, {...instructionMessage}])
+          }
+          else {
+            const message = {
+              content: chatInput
+            }
+            send('message', message, gameId)
           }
       }
     }
