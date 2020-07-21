@@ -101,7 +101,9 @@ const Game = () => {
             onSubmitChatInput={handleSubmitChatInput}
             chatInput={chatInput}
             setChatInput={setChatInput}/>
-      <CodeField code={code}/>
+      <CodeField code={code}
+                 send={send}
+                 gameId={gameId}/>
     </div> 
   )
 }

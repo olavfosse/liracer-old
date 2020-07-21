@@ -1,11 +1,74 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-const CodeField = ({code}) => {
+const isUselessKey = (key) => ['Shift', 'Meta', 'Alt', 'Control'].includes(key)
+
+const mapKeyToChar = (key) => {
+  if(['Shift', 'Meta', 'Alt', 'Control', 'Backspace'].includes(key)){
+    throw new Error('Not mapable to key')
+  } else if (key === "Enter"){
+    return "\n"
+  } else if (key === 'Tab') {
+    return "\t"
+  } else {
+    return key
+  }
+}
+
+const CodeField = ({code, send, gameId}) => {
+  const [cursorPosition, setCursorPosition] = useState(0)
+  const [wrongChars, setWrongChars] = useState(0)
+
+  useEffect(() => {
+    if(code !== ''){
+      send('cursor', { cursorPosition }, gameId)
+    }
+  }, [cursorPosition, send, gameId, code])
+
+  const handleKeyDown = (event) => {
+    if(['Tab', ' '].includes(event.key)){ // Prevent search bar being opened on Tab and scroll on Space
+      event.preventDefault()
+    }
+
+    if(isUselessKey(event.key)){}
+    else if (event.key === 'Backspace'){
+      if(wrongChars > 0){
+        setWrongChars(wrongChars - 1)
+      } else if (cursorPosition > 0) {
+        setCursorPosition(cursorPosition - 1)
+      }
+    } else if(wrongChars > 0){
+      setWrongChars(wrongChars + 1)
+    } else {
+      if(mapKeyToChar(event.key) !== code[cursorPosition]) {
+        setWrongChars(wrongChars + 1)
+      } else {
+        setCursorPosition(cursorPosition + 1)
+      }
+    }
+  }
+
   return (
     <>
       <div id="code-field-header"/>
-      <pre id="code-field-body">
-        {code}
+      <pre onKeyDown={handleKeyDown} id="code-field-body" tabIndex="0">
+        {
+          code && code.split('').map((char, index) => {
+            let style = {}
+
+            if(wrongChars > 0) {
+              if(index >= cursorPosition && index < cursorPosition + wrongChars)
+                style.background = '#ba5d5d'
+            } else if (index === cursorPosition) {
+              style.background = '#cfbaa5'
+            } 
+        
+            if(char === "\n"){
+              return <br key={index}/>
+            } else {
+              return <span key={index} style={style}>{char}</span>
+            }
+          })
+        }
       </pre>
     </>
   )
