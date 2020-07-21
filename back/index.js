@@ -58,6 +58,8 @@ wss.on('connection', (ws, req) => {
         handleJoin(id)
       } else if(type === 'message'){
         handleMessage(body, id)
+      } else {
+        error('message indispatchable')
       }
     }
 
