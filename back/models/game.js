@@ -22,6 +22,8 @@ const games = {}
 
 const get = (gameId) => games[gameId]
 
+const getAll = () => games
+
 const create = (id) => {
   const quote = Quote.random()
   const messages = [
@@ -88,12 +90,13 @@ const createMessage = (id, message) => {
 
 const publicInterface = {
   get,
+  getAll,
   create,
   remove,
   getPlayer,
   createPlayer, 
   removePlayer,
-  createMessage
+  createMessage,
 }
 
 module.exports = publicInterface

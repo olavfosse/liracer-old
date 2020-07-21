@@ -50,7 +50,8 @@ wss.on('connection', (ws, req) => {
         } else {
           Game.createPlayer(id, ip, ws)
           const {quote} = game
-         send('quote', quote)
+          send('quote', quote)
+          send('messages', game.messages)
         }
       } else if(type === 'message'){
         const sender = Game.getPlayer(id, ip)

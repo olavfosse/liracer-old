@@ -41,14 +41,13 @@ const Game = () => {
       return
     }
 
-    const saveMessage = (message) => setMessages((messages) => messages.concat(message))
-
     const dispatch = (message) => {
       const { type, body } = JSON.parse(message.data)
 
       switch(type){
+        case('messages'):
         case('message'):
-          saveMessage(body)
+          setMessages((messages) => messages.concat(body))
           break
         case('quote'):
           setCode(body.code)
