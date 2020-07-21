@@ -39,7 +39,6 @@ wss.on('connection', (ws, req) => {
   log('connected')
 
   ws.onmessage = (message) => {
-  
     const dispatch = async () => {
       const { type, body, id} = JSON.parse(message.data)
       if(!(typeof type === 'string' && typeof body === 'object' && id !== undefined)){
@@ -70,5 +69,11 @@ wss.on('connection', (ws, req) => {
 
     log('received:', JSON.parse(message.data))
     dispatch()
+
+   
+  }
+
+  ws.onclose = () => {
+    Object.entries(Game.getAll()).forEach(([_, game]) => Game.removePlayer(game.id, ip))
   }
 })
