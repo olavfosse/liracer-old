@@ -20,8 +20,6 @@ wss.on('connection', (ws, req) => {
 
   const send = (type, body) => sendToWs(type, body, ws)
 
-  const sendMessage = (sender, content) => send('message', { sender, content })
-
   const log = (...message) => console.log(ip, '|', ...message)
   const error = (...error) => console.error(ip, '|', ...error)
 
@@ -30,19 +28,17 @@ wss.on('connection', (ws, req) => {
   ws.onmessage = (message) => {
     const handleJoin = (id) => {
       const game = Game.get(id) || Game.create(id)
-      if(Game.getPlayer(id, ip)){
-        sendMessage('liracer', 'Your ip is already connected to this game. Please close your other client.') 
-      } else {
-        Game.createPlayer(id, ip, ws)
-        const {quote} = game
-        send('quote', quote)
-        send('messages', game.messages)
-      }
+      Game.removePlayer(ip)
+      Game.createPlayer(id, ip, ws)
+      const {quote} = game
+      send('quote', quote)
+      send('messages', game.messages)
     }
 
     const handleMessage = (body, id) => {
-      const sender = Game.getPlayer(id, ip)
+      const sender = Game.getPlayer(ip)
       const recipients = Game.get(id).players
+      console.log(sender)
       if(sender !== undefined){
         const message = {
           content: body.content,
@@ -53,6 +49,7 @@ wss.on('connection', (ws, req) => {
         log(Game.get(id))
       }
     }
+
     const dispatch = async () => {
       const { type, body, id} = JSON.parse(message.data)
       if(!(typeof type === 'string' && typeof body === 'object' && id !== undefined)){
@@ -69,6 +66,6 @@ wss.on('connection', (ws, req) => {
   }
 
   ws.onclose = () => {
-    Object.entries(Game.getAll()).forEach(([_, game]) => Game.removePlayer(game.id, ip))
+    Object.entries(Game.getAll()).forEach(([_, game]) => Game.removePlayer(ip))
   }
 })

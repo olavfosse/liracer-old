@@ -54,8 +54,21 @@ const remove = (gameId) => {
   delete games[gameId]
 }
 
-const getPlayer = (gameId, playerIp) => {
-  return games[gameId] && games[gameId].players.find(player => playerIp == player.ip)
+const getPlayer = (playerIp) => {
+  let player
+  Object.entries(games).forEach(([_, game]) => {
+    game.players.forEach((innerPlayer) => {
+      if(innerPlayer.ip === playerIp){
+        player = innerPlayer
+        return
+      }
+    })
+    if(player){
+      return
+    }
+  })
+
+  return player
 }
 
 const uniqueColor = (gameId) => colors.find(color => {
@@ -79,9 +92,10 @@ const createPlayer = (gameId, playerIp, ws) => {
   }
 }
 
-const removePlayer = (gameId, playerIp) => {
-  const game = get(gameId)
-  game.players = game.players.filter(player => player.ip !== playerIp)
+const removePlayer = (playerIp) => {
+  Object.entries(games).forEach(([_, game]) => {
+    game.players = game.players.filter(player => player.ip !== playerIp)
+  })
 }
 
 const createMessage = (id, message) => {
