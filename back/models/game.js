@@ -1,4 +1,5 @@
 const Quote = require('./quote')
+const { random } = require('./quote')
 
 const makeColor = (name, code) => ({
   name,
@@ -102,6 +103,8 @@ const createMessage = (id, message) => {
   games[id].messages.push(message)
 }
 
+const newQuote = (id) => get(id).quote = Quote.random()
+
 const publicInterface = {
   get,
   getAll,
@@ -111,6 +114,7 @@ const publicInterface = {
   createPlayer, 
   removePlayer,
   createMessage,
+  newQuote
 }
 
 module.exports = publicInterface

@@ -53,8 +53,19 @@ wss.on('connection', (ws, req) => {
     }
 
     const handleCursor = (body, id) => {
-      const {color} = Game.getPlayer(ip)
-      sendToGame('cursor', {...body, color}, id)
+      const { color, name} = Game.getPlayer(ip)
+      if(body.cursorPosition === Game.get(id).quote.code.length){
+        const quote = Game.newQuote(id)
+        sendToGame('quote', quote, id)
+        const message = {
+          sender: 'liracer',
+          content: `${name} won!`
+        }
+        sendToGame('message', message, id)
+        Game.createMessage(message)
+      } else {
+        sendToGame('cursor', {...body, color}, id)
+      }
     }
 
     const dispatch = async () => {

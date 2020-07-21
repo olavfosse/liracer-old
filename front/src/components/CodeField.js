@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 const isUselessKey = (key) => ['Shift', 'Meta', 'Alt', 'Control'].includes(key)
 
@@ -14,10 +14,7 @@ const mapKeyToChar = (key) => {
   }
 }
 
-const CodeField = ({ code, send, gameId, cursors }) => {
-  const [cursorPosition, setCursorPosition] = useState(0)
-  const [wrongChars, setWrongChars] = useState(0)
-
+const CodeField = ({ code, send, gameId, cursors, cursorPosition, setCursorPosition, wrongChars, setWrongChars }) => {
   useEffect(() => {
     if(code !== ''){
       send('cursor', { cursorPosition }, gameId)

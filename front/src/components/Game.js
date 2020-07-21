@@ -16,6 +16,9 @@ const Game = () => {
   const [chatInput, setChatInput] = useState('')
   const [gameId, setGameId] = useState(null)
   const [cursors, setCursors] = useState({})
+  const [cursorPosition, setCursorPosition] = useState(0)
+  const [wrongChars, setWrongChars] = useState(0)
+
 
   const send = (type, body, id) => {
     const message = {
@@ -55,6 +58,8 @@ const Game = () => {
         case('quote'):
           setCode(body.code)
           addMessage('liracer', `The current quote is ${body.program} in the ${body.language} language`)
+          setCursorPosition(0)
+          setWrongChars(0)
           break
         case('cursor'):
           setCursors((cursors) => ({ ...cursors, [body.color]: body.cursorPosition }))
@@ -108,7 +113,11 @@ const Game = () => {
       <CodeField code={code}
                  send={send}
                  gameId={gameId}
-                 cursors={cursors}/>
+                 cursors={cursors}
+                 cursorPosition={cursorPosition}
+                 setCursorPosition={setCursorPosition}
+                 wrongChars={wrongChars}
+                 setWrongChars={setWrongChars}/>
     </div> 
   )
 }
