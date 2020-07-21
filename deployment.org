@@ -1,0 +1,7 @@
+* Deployment
+liracer is deployed to Heroku. Seeing as it is a monorepository the process of deployment slightly different than the normal =git push heroku master= although not by a lot.
+
+To deploy the backend run the following command in the root directory of the repository.
+#+begin_src sh
+git subtree push --prefix back heroku master
+#+end_src
