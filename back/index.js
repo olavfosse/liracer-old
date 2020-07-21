@@ -18,6 +18,11 @@ wss.on('connection', (ws, req) => {
     ws.send(JSON.stringify(object))
   }
 
+  // Send to all players in game gameId
+  const sendToGame = (type, body, gameId) => {
+    Game.get(gameId).players.forEach((player) => sendToWs(type, body, player.ws))
+  }
+
   const send = (type, body) => sendToWs(type, body, ws)
 
   const log = (...message) => console.log(ip, '|', ...message)
@@ -37,16 +42,13 @@ wss.on('connection', (ws, req) => {
 
     const handleMessage = (body, id) => {
       const sender = Game.getPlayer(ip)
-      const recipients = Game.get(id).players
-      console.log(sender)
       if(sender !== undefined){
         const message = {
           content: body.content,
           sender: sender.name
         }
         Game.createMessage(id, message)
-        recipients.forEach(({ws}) => sendToWs('message', message, ws))
-        log(Game.get(id))
+        sendToGame('message', message, id)
       }
     }
 
