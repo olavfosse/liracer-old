@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Game.css'
+import CodeField from './CodeField'
+import Chat from './Chat'
 
 const wsUrl = 'ws://localhost:3001/'
 const instructionMessage = {
@@ -95,26 +97,11 @@ const Game = () => {
 
   return (
     <div id="game">
-      <div id="chat-header"/>
-      <div id="chat-body">
-        {
-          messages.map(({sender, content}, index) => (
-            <div key={index}>
-              <b>&lt;{sender}&gt;</b>
-              <span>{content}</span>
-            </div>
-          ))
-        }
-      </div>
-      <form onSubmit={handleSubmitChatInput} id="chat-input">
-        <input onChange={(event) => setChatInput(event.target.value)}
-               type="text"
-               value={chatInput}/>
-      </form>
-      <div id="code-field-header"/>
-      <pre id="code-field-body">
-        {code}
-      </pre>
+      <Chat messages={messages}
+            onSubmitChatInput={handleSubmitChatInput}
+            chatInput={chatInput}
+            setChatInput={setChatInput}/>
+      <CodeField code={code}/>
     </div> 
   )
 }
