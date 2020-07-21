@@ -22,7 +22,8 @@ const CodeField = ({code, send, gameId}) => {
     if(code !== ''){
       send('cursor', { cursorPosition }, gameId)
     }
-  }, [cursorPosition, send, gameId, code])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cursorPosition, gameId, code])
 
   const handleKeyDown = (event) => {
     if(['Tab', ' '].includes(event.key)){ // Prevent search bar being opened on Tab and scroll on Space
