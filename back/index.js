@@ -6,10 +6,6 @@ const wss = new WebSocket.Server({ port }, () => {
   console.log(`WebSocket server running on port ${port}`)
 })
 
-const sendMessageToAll = (game) => {
-
-}
-
 wss.on('connection', (ws, req) => {
   const ip = req.connection.remoteAddress
 
