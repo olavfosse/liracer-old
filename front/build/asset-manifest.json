@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/liracer/static/css/main.e642e79e.chunk.css",
-    "main.js": "/liracer/static/js/main.be1fc49c.chunk.js",
-    "main.js.map": "/liracer/static/js/main.be1fc49c.chunk.js.map",
+    "main.js": "/liracer/static/js/main.c38b6750.chunk.js",
+    "main.js.map": "/liracer/static/js/main.c38b6750.chunk.js.map",
     "runtime-main.js": "/liracer/static/js/runtime-main.40fa2c9f.js",
     "runtime-main.js.map": "/liracer/static/js/runtime-main.40fa2c9f.js.map",
     "static/js/2.bbc3318b.chunk.js": "/liracer/static/js/2.bbc3318b.chunk.js",
     "static/js/2.bbc3318b.chunk.js.map": "/liracer/static/js/2.bbc3318b.chunk.js.map",
     "index.html": "/liracer/index.html",
-    "precache-manifest.055554c4a5cf1b4e0a9717fe642412b7.js": "/liracer/precache-manifest.055554c4a5cf1b4e0a9717fe642412b7.js",
+    "precache-manifest.f87099fcabfad3acf9911e098b162b4a.js": "/liracer/precache-manifest.f87099fcabfad3acf9911e098b162b4a.js",
     "service-worker.js": "/liracer/service-worker.js",
     "static/css/main.e642e79e.chunk.css.map": "/liracer/static/css/main.e642e79e.chunk.css.map",
     "static/js/2.bbc3318b.chunk.js.LICENSE.txt": "/liracer/static/js/2.bbc3318b.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.40fa2c9f.js",
     "static/js/2.bbc3318b.chunk.js",
     "static/css/main.e642e79e.chunk.css",
-    "static/js/main.be1fc49c.chunk.js"
+    "static/js/main.c38b6750.chunk.js"
   ]
 }

@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ce2c1e497272315ef3b59598fc51d816",
+    "revision": "72392c0a454c3dbeeec0860c8825d66d",
     "url": "/liracer/index.html"
   },
   {
-    "revision": "9ddb454f1528c6487aa7",
+    "revision": "7c275c5ed467f9344c10",
     "url": "/liracer/static/css/main.e642e79e.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/liracer/static/js/2.bbc3318b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9ddb454f1528c6487aa7",
-    "url": "/liracer/static/js/main.be1fc49c.chunk.js"
+    "revision": "7c275c5ed467f9344c10",
+    "url": "/liracer/static/js/main.c38b6750.chunk.js"
   },
   {
     "revision": "749424320c9dbdbe29e0",

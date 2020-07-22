@@ -3,7 +3,7 @@ import './Game.css'
 import CodeField from './CodeField'
 import Chat from './Chat'
 
-const wsUrl = 'ws://localhost:3001/'
+const wsUrl = process.env.NODE_ENV === 'development' ? 'ws://localhost:443/' : 'wss://vast-river-29958.herokuapp.com/'
 const instructionMessage = {
   sender: 'liracer',
   content: 'To join a game, send "/join id". If a game by the given id exists you join that, otherwise a new game is created.'
