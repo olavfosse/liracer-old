@@ -1,5 +1,4 @@
 const Quote = require('./quote')
-const { random } = require('./quote')
 
 const makeColor = (name, code) => ({
   name,
