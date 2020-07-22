@@ -1,7 +1,7 @@
 const WebSocket = require('ws')
 const Game = require('./models/game')
 
-const port = process.env.PORT
+const port = 443
 const wss = new WebSocket.Server({ port }, () => {
   console.log(`WebSocket server running on port ${port}`)
 })
