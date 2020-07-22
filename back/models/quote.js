@@ -44,7 +44,6 @@ const enforceNoSpaceIndentation = (quotes) => {
 
 const enforceMaxium79CharactersPerLine = (quotes) => {
   quotes.forEach(quote => {
-
     quote.code.split('\n').forEach((line, index) => {
       if(line.length > 79) {
         const path = getProgramPath(quote.language, quote.program)
@@ -55,9 +54,22 @@ const enforceMaxium79CharactersPerLine = (quotes) => {
   })
 }
 
+const enforceNoExcessNewline = (quotes) => {
+  quotes.forEach(quote => {
+    const index = quote.code.length - 1
+    if(quote.code[index] === '\n'){
+      const path = getProgramPath(quote.language, quote.program)
+      // refactor getProgramPath to be getQuotePath
+      console.error(`ERROR: Found excess newline at ${path}:${index + 1}`)
+      process.exit(1)
+    }
+  })
+}
+
 const quotes = getQuotes()
 enforceNoSpaceIndentation(quotes)
 enforceMaxium79CharactersPerLine(quotes)
+enforceNoExcessNewline(quotes)
 
 const random = () => quotes[Math.floor(Math.random() * quotes.length)]
 
