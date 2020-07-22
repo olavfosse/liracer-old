@@ -88,6 +88,7 @@ const createPlayer = (gameId, playerIp, ws) => {
       ws
     }
     games[gameId].players.push(player)
+    return player
   } else {
     throw 'Could not create player since the room is full'
   }

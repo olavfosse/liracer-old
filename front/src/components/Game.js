@@ -12,6 +12,7 @@ const instructionMessage = {
 const Game = () => {
   const [messages, setMessages] = useState([])
   const [code, setCode] = useState('')
+  const [color, setColor] = useState(null)
   const [ws, setWs] = useState(null)
   const [chatInput, setChatInput] = useState('')
   const [gameId, setGameId] = useState(null)
@@ -63,6 +64,9 @@ const Game = () => {
           break
         case('cursor'):
           setCursors((cursors) => ({ ...cursors, [body.color]: body.cursorPosition }))
+          break
+        case('color'):
+          setColor(body.color)
           break
         default:
           throw new Error('Could not dispatch message')

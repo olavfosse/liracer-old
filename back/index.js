@@ -34,8 +34,9 @@ wss.on('connection', (ws, req) => {
     const handleJoin = (id) => {
       const game = Game.get(id) || Game.create(id)
       Game.removePlayer(ip)
-      Game.createPlayer(id, ip, ws)
+      const {color} = Game.createPlayer(id, ip, ws)
       const {quote} = game
+      send('color', { color })
       send('quote', quote)
       send('messages', game.messages)
     }
@@ -88,6 +89,6 @@ wss.on('connection', (ws, req) => {
   }
 
   ws.onclose = () => {
-    Object.entries(Game.getAll()).forEach(([_, game]) => Game.removePlayer(ip))
+    Game.removePlayer(ip)
   }
 })
