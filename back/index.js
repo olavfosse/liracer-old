@@ -70,7 +70,15 @@ wss.on('connection', (ws, req) => {
     }
 
     const dispatch = async () => {
-      const { type, body, id} = JSON.parse(message.data)
+      let data
+      try {
+        data = JSON.parse(message.data)
+      } catch {
+        error('inparsable message')
+        return
+      }
+      log('received:', data)
+      const { type, body, id } = data
       if(!(typeof type === 'string' && typeof body === 'object' && id !== undefined)){
         error('message invalid')
       } else if(type === 'join'){
@@ -84,7 +92,6 @@ wss.on('connection', (ws, req) => {
       }
     }
 
-    log('received:', JSON.parse(message.data))
     dispatch()
   }
 
