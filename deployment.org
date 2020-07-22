@@ -1,7 +1,13 @@
 * Deployment
-liracer is deployed to Heroku. Seeing as it is a monorepository the process of deployment slightly different than the normal =git push heroku master= although not by a lot.
+For deployment I use Heroku and GitHub Pages. Seeing as it is a monorepository the process of deployment slightly different than the normal =git push heroku master= although not by a lot.
 
-To deploy the backend run the following command in the root directory of the repository.
+To deploy run the following commands in the root of the repository.
+** Backend
 #+begin_src sh
 git subtree push --prefix back heroku master
+#+end_src
+
+** Frontend
+#+begin_src sh
+git subtree push --prefix front/build/ origin gh-pages
 #+end_src
