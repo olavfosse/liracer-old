@@ -121,7 +121,8 @@ const Game = () => {
                  cursorPosition={cursorPosition}
                  setCursorPosition={setCursorPosition}
                  wrongChars={wrongChars}
-                 setWrongChars={setWrongChars}/>
+                 setWrongChars={setWrongChars}
+                 color={color}/>
     </div> 
   )
 }

@@ -14,7 +14,15 @@ const mapKeyToChar = (key) => {
   }
 }
 
-const CodeField = ({ code, send, gameId, cursors, cursorPosition, setCursorPosition, wrongChars, setWrongChars }) => {
+const CodeField = ({ code,
+                     send,
+                     gameId,
+                     cursors,
+                     cursorPosition,
+                     setCursorPosition,
+                     wrongChars,
+                     setWrongChars,
+                     color }) => {
   useEffect(() => {
     if(code !== ''){
       send('cursor', { cursorPosition }, gameId)
@@ -53,9 +61,9 @@ const CodeField = ({ code, send, gameId, cursors, cursorPosition, setCursorPosit
           code && code.split('').map((char, index) => {
             let style = {}
 
-            Object.entries(cursors).forEach(([color, innerIndex]) => {
-              if(index === innerIndex){
-                style.background = color
+            Object.entries(cursors).forEach(([cursorColor, innerIndex]) => {
+              if(index === innerIndex && color !== cursorColor){
+                style.background = cursorColor
               }
             })
 
