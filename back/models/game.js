@@ -56,7 +56,7 @@ const remove = (gameId) => {
 
 const getPlayer = (playerIp) => {
   let player
-  Object.entries(games).forEach(([_, game]) => {
+  Object.entries(games).forEach(([, game]) => {
     game.players.forEach((innerPlayer) => {
       if(innerPlayer.ip === playerIp){
         player = innerPlayer
@@ -94,7 +94,7 @@ const createPlayer = (gameId, playerIp, ws) => {
 }
 
 const removePlayer = (playerIp) => {
-  Object.entries(games).forEach(([_, game]) => {
+  Object.entries(games).forEach(([, game]) => {
     game.players = game.players.filter(player => player.ip !== playerIp)
   })
 }
