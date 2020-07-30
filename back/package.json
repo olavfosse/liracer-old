@@ -16,6 +16,7 @@
     "ws": "^7.3.1"
   },
   "devDependencies": {
-    "eslint": "^7.5.0"
+    "eslint": "^7.5.0",
+    "npm-watch": "^0.6.0"
   }
 }

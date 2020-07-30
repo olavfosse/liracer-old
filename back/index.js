@@ -1,10 +1,16 @@
-const WebSocket = require('ws')
+const express = require('express')
+const { Server } = require('ws')
+
+const app = express()
+const PORT = process.env.PORT | 3000
 const Game = require('./models/game')
 
-const port = process.env.PORT || 443
-const wss = new WebSocket.Server({ port }, () => {
-  console.log(`WebSocket server running on port ${port}`)
+app.use(express.static('../front/build'))
+const server = app.listen(PORT, () => {
+  console.log(`HTTP server running on ${PORT}`)
 })
+
+const wss = new Server({ server })
 
 wss.on('connection', (ws, req) => {
   const ip = req.connection.remoteAddress
