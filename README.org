@@ -1,4 +1,2 @@
 * liracer
 This is a game where you compete to write source code quotes as fast as possible
-** Project Structure
-The Express backend is stored in =back= and the React frontend in =front=.
