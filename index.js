@@ -2,7 +2,7 @@ const express = require('express')
 const { Server } = require('ws')
 
 const app = express()
-const PORT = process.env.PORT | 3000
+const PORT = process.env.PORT || 3000
 const Game = require('./models/game')
 
 app.use(express.static('./front/build'))
