@@ -5,7 +5,7 @@ const app = express()
 const PORT = process.env.PORT | 3000
 const Game = require('./models/game')
 
-app.use(express.static('../front/build'))
+app.use(express.static('./front/build'))
 const server = app.listen(PORT, () => {
   console.log(`HTTP server running on ${PORT}`)
 })
