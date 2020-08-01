@@ -74,7 +74,14 @@ const Game = () => {
     }
 
     ws.onmessage = dispatch
-    ws.onclose = () => addMessage('liracer', 'Connection closed. This can probably be resolved by reloading the page.')
+    // ws.onclose does not work as expected on Chrome.
+    // Supposedly it waits 4minutes before calling it. I have not verified this
+    // myself although certainly didn't call immediately after closing the
+    // connection as I would expect. The workaround for this is to use the
+    // onerror property instead.
+    //
+    // See https://bugzilla.mozilla.org/show_bug.cgi?id=1071708 for bug report.
+    ws.onerror = () => addMessage('liracer', 'Connection closed. This can probably be resolved by reloading the page.')
   }, [ws])
 
   const handleSubmitChatInput = (event) => {
