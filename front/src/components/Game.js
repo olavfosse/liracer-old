@@ -74,6 +74,7 @@ const Game = () => {
     }
 
     ws.onmessage = dispatch
+    ws.onclose = () => addMessage('liracer', 'Connection closed. This can probably be resolved by reloading the page.')
   }, [ws])
 
   const handleSubmitChatInput = (event) => {
