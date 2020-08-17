@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-const isUselessKey = (key) => ['Shift', 'Meta', 'Alt', 'Control'].includes(key)
+const isUselessKey = (key) => ['Shift', 'Meta', 'Alt', 'Control', 'AltGraph'].includes(key)
 
 const mapKeyToChar = (key) => {
   if(['Shift', 'Meta', 'Alt', 'Control', 'Backspace'].includes(key)){
