@@ -1,6 +1,9 @@
 * liracer
 This is a game where you compete to write source code quotes as fast as possible
 
+** License
+The project is licensed under AGPLV3, but I preserve the right to change the license at will
+
 ** Contribute
 The easiest way to contribute is to submit a code quote. The quotes are stored in [[https://github.com/olav35/liracer/tree/master/models/quotes][models/quotes/<language>]]. The code quotes need to fullfil the following requirements.
 - Be permissively licensed.
