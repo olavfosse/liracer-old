@@ -97,6 +97,7 @@ const Game = () => {
           const id = words[1]
           send('join', {}, id)
           setGameId(id)
+          setCursors([])
           break
         default:
           if(gameId === null){
