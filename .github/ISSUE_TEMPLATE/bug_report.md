@@ -7,6 +7,10 @@ assignees: olav35
 
 ---
 
+**Guidelines**
+- Remove unused sections, including this one.
+- Specify information only in the most specific section appropriate. For example do not repeat your web browsers in **Describe the bug** and **Web Browsers**. It should only be specified in **Web Browsers**. DRY does not only apply to source code.
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
@@ -20,10 +24,12 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Operating Systems**
-The operating systems or distributions you are able to reproduce the issue with. It is appreciated if you take the time to try and reproduce the issue on multiple systems.
+Which operating systems or distributions you where and where not able to reproduce the issue with and the versions thereof. Only include operating systems that you have tested.
+
+Tip: `uname -sr` or `uname -a` should do the trick.
 
 **Web Browsers**
-The web browsers you can reproduce the issue with and version thereof. It is appreciated if you take the time to try and reproduce the issue on multiple browsers.
+Which web browsers you where and where not able to reproduce the issue with and the versions thereof. Only include web browsers that you have tested.
 
 **Fix suggestions**
 Suggestions for how this issue may be solved. Pull requests are also welcome
