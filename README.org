@@ -9,4 +9,4 @@ The easiest way to contribute is to submit a code quote. The quotes are stored i
 - Be permissively licensed.
 - Be well written.
 - Be moderately short.
-For a start you can translate an already existing quote to another language.
+For a start you can translate an already existing quote to a new language.
