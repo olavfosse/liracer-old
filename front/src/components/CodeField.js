@@ -74,7 +74,12 @@ const CodeField = ({ code,
             }
         
             if(char === "\n"){
-              return <br key={index}/>
+              return (
+                <>
+                  {index === cursorPosition ? <span style={style}>↵</span> : null}
+                  <br key={index}/>
+                </>
+              )
             } else {
               return <span key={index} style={style}>{char}</span>
             }
