@@ -31,9 +31,8 @@ const CodeField = ({ code,
   }, [cursorPosition, gameId, code])
 
   const handleKeyDown = (event) => {
-    if(['Tab', ' '].includes(event.key)){ // Prevent search bar being opened on Tab and scroll on Space
-      event.preventDefault()
-    }
+    // Prevent search bar being opening on tab, page scrolling on space, history navigation on backspace etc
+    event.preventDefault()
 
     if(isUselessKey(event.key)){}
     else if (event.key === 'Backspace'){
