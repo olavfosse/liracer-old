@@ -32,7 +32,9 @@ const CodeField = ({ code,
 
   const handleKeyDown = (event) => {
     // Prevent search bar being opening on tab, page scrolling on space, history navigation on backspace etc
-    event.preventDefault()
+    if(event.key === 'Meta'){
+      event.preventDefault()
+    }
 
     if(isUselessKey(event.key)){}
     else if (event.key === 'Backspace'){
