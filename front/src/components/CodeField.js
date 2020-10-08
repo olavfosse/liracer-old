@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-const isUselessKey = (key) => !RegExp('[A-Za-z0-9~@,.:;!?$£&\t\n _+\-*\/%^=#"'`(){}\[\]<>|]').test(key)
+const isUselessKey = (key) => !RegExp('[A-Za-z0-9~@,.:;!?$£&\\\t\n _+\-*\/%^=#"'`(){}\[\]<>|]').test(key)
 
 const mapKeyToChar = (key) => {
   if(['Shift', 'Meta', 'Alt', 'Control', 'Backspace'].includes(key)){
