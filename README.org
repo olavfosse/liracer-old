@@ -7,8 +7,9 @@ The project is licensed under AGPLV3, but I preserve the right to change the lic
 ** Contribute
 The easiest way to contribute is to submit a code quote. The quotes are stored in [[https://github.com/olav35/liracer/tree/master/models/quotes][models/quotes/<language>]]. The code quotes need to fullfil the following requirements.
 - Use literal tabs(not spaces) for indention.
-- Be well written.
+- Be idiomatic and well written.
 - Be moderately short.
+- Be /interesting/. The code should either display the syntax of a language with a familiar, easily digestible example such as [[https://github.com/olav35/liracer/blob/master/models/quotes/c%2B%2B/fibonacci.cpp][fibonacci.cpp]], [[https://github.com/olav35/liracer/blob/master/models/quotes/c/fizz_buzz.c][fizz_buzz.c]], [[https://github.com/olav35/liracer/blob/master/models/quotes/haskell/hello_world.hs][hello_world.hs]] or    [[https://github.com/olav35/liracer/blob/master/models/quotes/ruby/fibonacci_sequence.rb][fibonacci_sequence.rb]], or be a real-life example.
 - Be legitimate contributions(not spam garbage).
 For a start you can translate an already existing quote to a new language.
 
