@@ -17,4 +17,4 @@ The easiest way to contribute is to submit a code quote. The quotes are stored i
 For a start you can translate an already existing quote to a new language.
 
 ** Rewrite
-A complete rewrite is in progress at [[https://github.com/olav35/liracer-rewrite]]. So far this is only a mock UI, so most contributions still belong in this repository.
+A complete rewrite is in progress at [[https://github.com/olav35/liracer-rewrite]].
