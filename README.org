@@ -1,4 +1,4 @@
-* liracer
-The free and open source code racing game.
+* liracer-old
+The original, now archived codebase of liracer the free and open source code racing game.
 
-This repository will soon be archived in favour of [[https://github.com/olav35/liracer-rewrite]]. Direct new issues and PRs to liracer-rewrite
+See [[https://github.com/olav35/liracer]] for the current codebase.
