@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 
-const isUselessKey = (key) => ['Shift', 'Meta', 'Alt', 'Control', 'AltGraph'].includes(key)
+const isUselessKey = (key) => !RegExp(/^[A-Za-z0-9~@,.:;!?$£&\\\t\n _+\-*\/%^=#\"\'\`(){}\[\]<>\|]{1}$/).test(key)
 
 const mapKeyToChar = (key) => {
-  if(['Shift', 'Meta', 'Alt', 'Control', 'Backspace'].includes(key)){
-    throw new Error('Not mapable to key')
-  } else if (key === "Enter"){
+  if (key === "Enter") {
     return "\n"
   } else if (key === 'Tab') {
     return "\t"
@@ -36,17 +34,19 @@ const CodeField = ({ code,
       event.preventDefault()
     }
 
-    if(isUselessKey(event.key)){}
-    else if (event.key === 'Backspace'){
-      if(wrongChars > 0){
+    const key = mapKeyToChar(event.key)
+
+    if (key === 'Backspace') {
+      if (wrongChars > 0) {
         setWrongChars(wrongChars - 1)
       } else if (cursorPosition > 0) {
         setCursorPosition(cursorPosition - 1)
       }
-    } else if(wrongChars > 0){
+    } else if (isUselessKey(key)) { // Do nothing if the key is not whitelisted
+    } else if (wrongChars > 0) {
       setWrongChars(wrongChars + 1)
     } else {
-      if(mapKeyToChar(event.key) !== code[cursorPosition]) {
+      if (key !== code[cursorPosition]) {
         setWrongChars(wrongChars + 1)
       } else {
         setCursorPosition(cursorPosition + 1)
